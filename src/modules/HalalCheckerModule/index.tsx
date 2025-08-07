@@ -44,7 +44,7 @@ export default function HalalCheckerModule() {
                 {[1, 2, 3].map((_, i) => (
                   <div
                     key={i}
-                    className="self-stretch h-14 px-3 rounded-lg outline outline-2 outline-offset-[-2px] outline-black inline-flex justify-between items-center"
+                    className="self-stretch h-14 px-3 rounded-lg outline-2 outline-offset-[-2px] outline-black inline-flex justify-between items-center"
                   >
                     <div className="text-center justify-start text-black text-2xl max-lg:text-lg font-semibold">
                       Nama Produk
@@ -58,7 +58,7 @@ export default function HalalCheckerModule() {
             </div>
           </div>
 
-          <div className="w-1/2 max-lg:w-full flex flex-col justify-evenly max-lg:gap-10 items-center">
+          <div className="w-1/2 max-lg:w-full flex flex-col gap-10 items-center">
             <h1 className="self-stretch text-center justify-start text-black text-5xl font-semibold max-lg:hidden">
               Halal/Haram Checker
             </h1>
@@ -66,7 +66,13 @@ export default function HalalCheckerModule() {
               Ijtihad adalah Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             </p>
 
-            <div className="w-3/4 max-lg:w-full h-14 pl-3 pr-2.5 py-2.5 rounded-lg outline outline-2 outline-offset-[-2px] outline-black inline-flex justify-start items-center gap-2.5">
+            <div className="w-3/4 h-46 border-4 border-dashed flex items-center justify-center">
+              <img src="/file.svg" alt="file" />
+            </div>
+
+            <h4 className="text-h4">atau</h4>
+
+            <div className="w-3/4 max-lg:w-full h-14 pl-3 pr-2.5 py-2.5 rounded-lg outline-2 outline-offset-[-2px] outline-black inline-flex justify-start items-center gap-2.5">
               <input
                 type="text"
                 placeholder="nama/merk produk"

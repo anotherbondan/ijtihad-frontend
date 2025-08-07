@@ -26,7 +26,7 @@ export default function ChatbotModule() {
   setInput("");
 
   try {
-    const response = await fetch("http://localhost:8000/chatbot", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chatbot`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +46,6 @@ export default function ChatbotModule() {
     addMessage("Terjadi kesalahan saat memproses pesan Anda.", "bot");
   }
 };
-
 
   useEffect(() => {
     addMessage(
