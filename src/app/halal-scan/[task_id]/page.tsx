@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Loader from "@/components/elements/Loader";
+import { useParams } from "next/navigation";
 
 interface HalalScanStatus {
   status: string;
@@ -13,19 +14,19 @@ interface HalalScanStatus {
   } | null;
 }
 
-export default function ResultPage({ params }: { params?: { task_id: string } }) {
+export default function ResultPage() {
   const [data, setData] = useState<HalalScanStatus | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const taskId = params?.task_id || "";
+  const params = useParams<{ task_id: string }>();
 
   useEffect(() => {
-    if (!taskId) return;
+    if (!params.task_id) return;
 
     const fetchStatus = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/halal-scan/${taskId}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/halal-scan/${params.task_id}`);
         const json = await res.json();
         setData(json);
       } catch (err) {
@@ -39,7 +40,7 @@ export default function ResultPage({ params }: { params?: { task_id: string } })
 
     const interval = setInterval(fetchStatus, 3000);
     return () => clearInterval(interval);
-  }, [taskId]);
+  }, [params.task_id]);
 
   if (loading) {
     return <Loader/>;
