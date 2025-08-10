@@ -47,7 +47,7 @@ export default function ChatbotModule() {
 
       const data = await response.json();
       addMessage(data.response, "bot");
-    } catch (error: any) {
+    } catch (error) {
       console.error("Chatbot error:", error);
       addMessage("Terjadi kesalahan saat memproses pesan Anda.", "bot");
     }
