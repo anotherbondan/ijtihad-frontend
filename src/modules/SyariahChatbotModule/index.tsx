@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Sidebar from "./components/sidebar";
+import ReactMarkdown from "react-markdown";
 
 export default function ChatbotModule() {
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -19,40 +20,38 @@ export default function ChatbotModule() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  if (!input.trim()) return;
-  const userMessage = input.trim();
-  addMessage(userMessage, "user");
-  setInput("");
+    e.preventDefault();
+    if (!input.trim()) return;
+    const userMessage = input.trim();
+    addMessage(userMessage, "user");
+    setInput("");
 
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chatbot`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message: userMessage }),
-    });
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/chatbot`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: userMessage }),
+        }
+      );
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.detail || "Gagal mendapatkan respons dari server.");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.detail || "Gagal mendapatkan respons dari server."
+        );
+      }
+
+      const data = await response.json();
+      addMessage(data.response, "bot");
+    } catch (error: any) {
+      console.error("Chatbot error:", error);
+      addMessage("Terjadi kesalahan saat memproses pesan Anda.", "bot");
     }
-
-    const data = await response.json();
-    addMessage(data.response, "bot");
-  } catch (error: any) {
-    console.error("Chatbot error:", error);
-    addMessage("Terjadi kesalahan saat memproses pesan Anda.", "bot");
-  }
-};
-
-  useEffect(() => {
-    addMessage(
-      "Halo! Saya adalah asisten AI yang siap membantu Anda. Tanyakan apa saja!",
-      "bot"
-    );
-  }, []);
+  };
 
   useEffect(() => {
     if (chatContainerRef.current) {
@@ -62,14 +61,12 @@ export default function ChatbotModule() {
   }, [messages]);
 
   return (
-    <main className="min-h-screen pt-19">
+    <main className="min-h-screen pt-18">
       <div className="flex min-h-[90vh]">
-        {sidebarOpen && (
-          <Sidebar/>
-        )}
+        {sidebarOpen && <Sidebar />}
 
         <main className="flex-1 flex flex-col bg-transparent max-h-[90vh]">
-          <header className="flex relative z-20 items-center px-0 py-4 bg-transparent">
+          <header className="flex relative items-center z-10 px-0 py-4 w-fit bg-transparent">
             <button
               onClick={toggleSidebar}
               className="py-[1px] pr-[1px] rounded-r-md bg-gradient-primary"
@@ -98,11 +95,11 @@ export default function ChatbotModule() {
                 <div
                   className={`p-4 rounded-3xl ${
                     msg.sender === "user"
-                      ? "bg-[#D1F7E8] text-white rounded-br-lg"
-                      : "bg-gray-100 text-gray-800 rounded-bl-lg"
+                      ? "bg-[#D1F7E8] text-Text rounded-br-lg"
+                      : "bg-gray-100 text-Text rounded-bl-lg"
                   }`}
                 >
-                  <p>{msg.text}</p>
+                  <ReactMarkdown>{msg.text}</ReactMarkdown>
                 </div>
               </div>
             ))}
@@ -115,7 +112,7 @@ export default function ChatbotModule() {
                   type="text"
                   placeholder="Ketik pesan Anda di sini..."
                   autoComplete="off"
-                  className="w-full py-4 pl-6 pr-16 bg-gray-100 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D1F7E8] focus:border-transparent transition"
+                  className="w-full py-4 pl-6 pr-16 bg-gray-100 border-2 border-black rounded-lg transition"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                 />

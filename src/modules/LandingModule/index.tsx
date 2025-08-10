@@ -3,6 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function LandingModule() {
+  const logos = [
+    "/halalscan-logo.svg",
+    "/chatbot-logo.svg",
+    "/contractcheck-logo.svg",
+  ];
   return (
     <main className="py-36 px-4">
       <div className="flex flex-col gap-24 items-center justify-center">
@@ -11,14 +16,14 @@ export default function LandingModule() {
           alt="bg left"
           width={500}
           height={800}
-          className="absolute -z-10 left-0 top-0 h-screen w-auto"
+          className="absolute -z-10 left-0 top-0 h-screen w-auto animate-pulse"
         />
         <Image
           src="/home-right.svg"
           alt="bg right"
           width={500}
           height={800}
-          className="absolute -z-10 right-0 top-0 h-screen w-auto"
+          className="absolute -z-10 right-0 top-0 h-screen w-auto animate-pulse"
         />
         <div className="flex flex-col items-center justify-center gap-14 px-4">
           <h1 className="text-4xl lg:text-6xl font-bold text-center">
@@ -30,8 +35,8 @@ export default function LandingModule() {
             ipsum dolor sit, amet consectetur adipisicing elit. Quis
             exercitationem reprehenderit animi? Illum, blanditiis quidem.
           </p>
-          <Link href="/">
-            <Button label="Login" icon="/user.svg"/>
+          <Link href="/login">
+            <Button label="Login" icon="/user.svg" />
           </Link>
         </div>
 
@@ -43,7 +48,13 @@ export default function LandingModule() {
                 className="w-80 h-96 p-[1px] rounded-2xl bg-gradient-primary"
               >
                 <div className="w-full h-full bg-white rounded-2xl flex flex-col justify-center items-center gap-14">
-                  <div className="w-44 h-44 bg-zinc-300 rounded-full"></div>
+                  <div className="w-44 h-44">
+                    <img
+                      src={logos[idx]}
+                      alt="logo"
+                      className="h-full w-auto"
+                    />
+                  </div>
                   <div className="self-stretch text-center justify-start text-transparent text-3xl font-semibold bg-gradient-primary bg-clip-text">
                     {title.split(" ").map((word, i) => (
                       <span key={i}>

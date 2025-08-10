@@ -1,8 +1,25 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
+  const pathName = usePathname();
+  const isDashboard = pathName === "/dashboard"
+
+  const navItems = [
+    {
+      title: "Halal/Haram Checker",
+      path: "/halal-scan",
+    },
+    { title: "Syariah Chatbot", path: "/chatbot" },
+    {
+      title: "Gharar & Maysir Checker",
+      path: "/gharar-maysir",
+    },
+  ];
+
   return (
     <>
       <nav
@@ -48,21 +65,20 @@ export default function Navbar() {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-16">
-          <Link
-            href="/halal-checker"
-            className="text-xl font-semibold text-black"
-          >
-            Halal/Haram Checker
-          </Link>
-          <Link href="/chatbot" className="text-xl font-semibold text-black">
-            Syariah Chatbot
-          </Link>
-          <Link
-            href="/contract-checker"
-            className="text-xl font-semibold text-black"
-          >
-            Contract Checker
-          </Link>
+          {navItems.map((item, idx) => {
+            const isActive = item.path === pathName;
+            return (
+              <Link
+                key={idx}
+                href={item.path}
+                className={`text-xl font-semibold ${
+                  isActive ? "text-sandy-soil-500" : "text-black"
+                }`}
+              >
+                {item.title}
+              </Link>
+            );
+          })}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link href="/dashboard" className="text-sm/6 font-semibold">
@@ -75,12 +91,12 @@ export default function Navbar() {
             >
               <path
                 d="M2 42.7787C2 36.746 6.24331 31.6074 12.0101 30.6566L12.5295 30.571C17.1473 29.8097 21.8527 29.8097 26.4704 30.571L26.9899 30.6566C32.7567 31.6074 37 36.746 37 42.7787C37 45.3862 34.9538 47.5 32.4297 47.5H6.57032C4.0462 47.5 2 45.3862 2 42.7787Z"
-                stroke="black"
+                stroke={`${isDashboard ? "#e7b767" : "black"}`}
                 strokeWidth="3.75"
               />
               <path
                 d="M29.7084 12.3438C29.7084 17.7803 25.138 22.1875 19.5001 22.1875C13.8621 22.1875 9.29172 17.7803 9.29172 12.3438C9.29172 6.9072 13.8621 2.5 19.5001 2.5C25.138 2.5 29.7084 6.9072 29.7084 12.3438Z"
-                stroke="black"
+                stroke={`${isDashboard ? "#e7b767" : "black"}`}
                 strokeWidth="3.75"
               />
             </svg>
@@ -126,7 +142,7 @@ export default function Navbar() {
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-2">
                   <Link
-                    href="/halal-checker"
+                    href="/halal-scan"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-black"
                   >
                     Halal/Haram Checker
@@ -138,10 +154,10 @@ export default function Navbar() {
                     Syariah Chatbot
                   </Link>
                   <Link
-                    href="/contract-checker"
+                    href="/gharar-maysir"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-black"
                   >
-                    Contract Checker
+                    Gharar & Maysir Checker
                   </Link>
                 </div>
                 <div className="py-2">
