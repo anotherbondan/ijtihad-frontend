@@ -63,8 +63,7 @@ export default function GhararMaysirModule() {
           Gharar & Maysir Checker
         </h1>
         <p className="w-full text-center justify-start text-black text-xl font-medium lg:hidden">
-          Ijtihad adalah Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit, sed do
+          Alat ini membantu mengidentifikasi klausa bermasalah yang berpotensi mengandung gharar dan maysir. Unggah dokumen (PDF/PNG) atau masukkan teks, dan sistem kami akan memberikan analisis berbasis AI
         </p>
 
         <div className="flex max-lg:flex-col justify-between gap-5">
@@ -101,12 +100,14 @@ export default function GhararMaysirModule() {
               Gharar & Maysir Checker
             </h1>
             <p className="w-full text-center justify-start text-black text-xl font-medium max-lg:hidden">
-              Ijtihad adalah Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit, sed do
+              Alat ini membantu mengidentifikasi klausa bermasalah yang berpotensi mengandung gharar dan maysir. Unggah dokumen (PDF/PNG) atau masukkan teks, dan sistem kami akan memberikan analisis berbasis AI
+            </p>
+            <p className="w-full text-center justify-start text-black text-md font-medium">
+              Tips: ⚠️ Pastikan foto jelas, teks tidak buram, dan seluruh label terlihat agar hasil analisis lebih akurat.
             </p>
 
             <label
-              htmlFor="photo-upload"
+              htmlFor="file-upload"
               className="w-3/4 h-46 border-4 border-dashed flex items-center justify-center cursor-pointer"
             >
               <input

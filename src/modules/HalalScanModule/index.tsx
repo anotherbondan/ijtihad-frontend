@@ -63,14 +63,19 @@ export default function HalalScanModule() {
           Halal/Haram Checker
         </h1>
         <p className="w-full text-center justify-start text-black text-xl font-medium lg:hidden">
-          Ijtihad adalah Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit, sed do
+          Cek status halal/haram produk Anda dengan mudah. Unggah foto label
+          atau kemasan, lalu sistem kami akan membaca dan menganalisis
+          informasinya secara otomatis.
         </p>
 
         <div className="flex max-lg:flex-col justify-between gap-5">
           <div className="w-1/2 max-lg:w-full inline-flex flex-col justify-between lg:justify-center items-center gap-10">
-            <div className="max-lg:w-65 max-lg:h-65 w-80 h-80 p-1" >
-              <img src="/halalscan-logo.svg" alt="logo" className="h-full w-auto"/>
+            <div className="max-lg:w-65 max-lg:h-65 w-80 h-80 p-1">
+              <img
+                src="/halalscan-logo.svg"
+                alt="logo"
+                className="h-full w-auto"
+              />
             </div>
 
             <div className="self-stretch flex flex-col justify-start items-start gap-7">
@@ -101,8 +106,14 @@ export default function HalalScanModule() {
               Halal/Haram Checker
             </h1>
             <p className="w-full text-center justify-start text-black text-xl font-medium max-lg:hidden">
-              Ijtihad adalah Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit, sed do
+              Cek status halal/haram produk Anda dengan mudah. Unggah foto label
+              atau kemasan, lalu sistem kami akan membaca dan menganalisis
+              informasinya secara otomatis.
+            </p>
+            
+            <p className="w-full text-center justify-start text-black text-md font-medium">
+              Tips: ⚠️ Pastikan foto jelas, teks tidak buram, dan seluruh label
+              terlihat agar hasil analisis lebih akurat.
             </p>
 
             <label
