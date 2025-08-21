@@ -30,10 +30,7 @@ export default function LandingModule() {
             Selamat datang di Ijtihad!
           </h1>
           <p className="max-w-prose text-center text-xl">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis
-            exercitationem reprehenderit animi? Illum, blanditiis quidem. Lorem
-            ipsum dolor sit, amet consectetur adipisicing elit. Quis
-            exercitationem reprehenderit animi? Illum, blanditiis quidem.
+            Pilih layanan yang Anda butuhkan: cek halal produk, analisis dokumen, atau tanya jawab Syariah!
           </p>
           <Link href="/login">
             <Button label="Login" icon="/user.svg" />

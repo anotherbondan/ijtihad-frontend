@@ -6,11 +6,47 @@ import { useState } from "react";
 
 export default function HalalScanModule() {
   const [file, setFile] = useState<File | null>(null);
+  const [text, setText] = useState("");
   const router = useRouter();
 
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setFile(e.target.files[0]);
+    }
+  };
+
+  const handleSubmit = () => {
+    if (file) {
+      uploadFile();
+    } else if (text) {
+      uploadText();
+    }
+  };
+
+  const uploadText = async () => {
+    if (!text.trim()) {
+      alert("Input teks kosong!");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("text", text);
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/halal-scan`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!response.ok) throw new Error("Gagal upload file");
+
+      const data = await response.json();
+      router.push(`/halal-scan/${data.task_id}`);
+    } catch (err) {
+      alert((err as Error).message);
     }
   };
 
@@ -110,7 +146,7 @@ export default function HalalScanModule() {
               atau kemasan, lalu sistem kami akan membaca dan menganalisis
               informasinya secara otomatis.
             </p>
-            
+
             <p className="w-full text-center justify-start text-black text-md font-medium">
               Tips: ⚠️ Pastikan foto jelas, teks tidak buram, dan seluruh label
               terlihat agar hasil analisis lebih akurat.
@@ -140,8 +176,10 @@ export default function HalalScanModule() {
             <div className="w-3/4 max-lg:w-full h-14 pl-3 pr-2.5 py-2.5 rounded-lg outline-2 outline-offset-[-2px] outline-black inline-flex justify-start items-center gap-2.5">
               <input
                 type="text"
+                value={text}
                 placeholder="nama/merk produk"
                 className="text-2xl font-semibold px-3 py-2 rounded w-full focus:ring-0 focus:outline-none"
+                onChange={(e) => setText(e.target.value)}
               />
             </div>
 
@@ -149,7 +187,7 @@ export default function HalalScanModule() {
               <button
                 type="button"
                 className="flex items-center gap-5 px-14 py-2 rounded-md bg-[#72d3bd] active:bg-[#1a6e6a]"
-                onClick={uploadFile}
+                onClick={handleSubmit}
               >
                 <span className="font-semibold text-2xl">Check</span>
               </button>
